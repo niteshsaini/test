@@ -29,7 +29,6 @@ jobs:
         with:
           image: 'docker.io/my-app:${{ github.sha }}'
           fail-build: false
-          severity-cutoff: high      # or critical/high/low/negligible
-          output-format: sarif
+          output-format: table
 
       
