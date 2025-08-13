@@ -25,7 +25,7 @@ jobs:
       - name: Generate SBOM with Syft
         uses: anchore/sbom-action@v0
         with:
-          image-ref: 'docker.io/my-app:${{ github.sha }}'
+          image: 'docker.io/my-app:${{ github.sha }}'
           output-file: 'sbom.json'
           output-format: 'spdx-json'
 
