@@ -25,11 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Run OWASP ZAP Full Scan
-        #uses: zaproxy/action-full-scan@v0.12.0 
+      - name: Run OWASP ZAP BaseLine Scan
+        # uses: zaproxy/action-full-scan@v0.12.0 
         uses: zaproxy/action-baseline@v0.14.0
         with:
           target: https://offloadsecurity.com # Replace with the actual target URL of your application
         # Optional: Add rules file or other ZAP command-line options
         # rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a'
+        #  cmd_options: '-a'
