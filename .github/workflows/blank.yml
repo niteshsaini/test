@@ -30,6 +30,8 @@ jobs:
           image: 'docker.io/my-app:${{ github.sha }}'
           fail-build: false
           output-format: table
+          only-fixed: true
+          severity-cutoff: medium
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
