@@ -23,12 +23,11 @@ jobs:
         run: |
           docker build -t my-app:${{ github.sha }} .   
           
-      - name: Scan image for vulnerabilities with Grype
-        uses: anchore/scan-action@v6
-        with:
-          image: my-image:${{ github.sha }}  
-          severity-cutoff: medium  
-          output-format: table     
-          only-fixed: true    
+      - name: Download Grype
+                run: |
+                  curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo bash -s -- -b /usr/local/bin
+              - name: Run Grype scan
+                run: |
+                  grype image: my-image:${{ github.sha }}  
 
       
