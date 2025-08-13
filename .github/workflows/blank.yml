@@ -32,8 +32,6 @@ jobs:
       - name: Scan SBOM with Grype
         uses: anchore/scan-action@v6
         with:
-          sbom: 'sbom.json'
-          fail-build: false         
-          severity-cutoff: medium  
+          sbom: 'sbom.json'       
           output-format: table     
           only-fixed: true       
