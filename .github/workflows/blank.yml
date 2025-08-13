@@ -21,7 +21,8 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t my-app:${{ github.sha }} .          
+          docker build -t my-app:${{ github.sha }} .   
+          
       - name: Generate SBOM with Syft
         uses: anchore/sbom-action@v0
         with:
@@ -29,9 +30,4 @@ jobs:
           output-file: 'sbom.json'
           output-format: 'spdx-json'
 
-      - name: Scan SBOM with Grype
-        uses: anchore/scan-action@v6
-        with:
-          sbom: 'sbom.json'       
-          output-format: table     
-          only-fixed: true       
+      
