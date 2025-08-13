@@ -23,11 +23,13 @@ jobs:
         run: |
           docker build -t my-app:${{ github.sha }} .   
           
-      - name: Generate SBOM with Syft
-        uses: anchore/sbom-action@v0
+      - name: Scan image for vulnerabilities with Grype
+        uses: anchore/scan-action@v6
         with:
-          image: 'docker.io/my-app:${{ github.sha }}'
-          output-file: 'sbom.json'
-          output-format: 'spdx-json'
+          image: my-image:${{ github.sha }}
+          fail-build: false         
+          severity-cutoff: medium  
+          output-format: table     
+          only-fixed: true    
 
       
