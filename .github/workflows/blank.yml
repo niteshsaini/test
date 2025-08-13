@@ -23,11 +23,12 @@ jobs:
         run: |
           docker build -t my-app:${{ github.sha }} .   
           
-      - name: Download Grype
-                run: |
-                  curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo bash -s -- -b /usr/local/bin
-              - name: Run Grype scan
-                run: |
-                  grype image: my-image:${{ github.sha }}  
+      - name: Scan Image
+        uses: anchore/scan-action@v6
+        id: scan
+        with:
+          image: my-image:${{ github.sha }}  
+          fail-build: true
+          output-format: sarif
 
       
