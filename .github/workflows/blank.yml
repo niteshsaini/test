@@ -22,8 +22,29 @@ jobs:
       - name: Build an image from Dockerfile
         run: |
           docker build -t my-app:${{ github.sha }} .   
+
+      - name: Run Trivy to generate SBOM
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs' # or 'image', 'repo'
+          input: '.' # or your image name, repo path
+          format: 'spdx-json' # or 'cyclonedx-json'
+          output: 'sbom.spdx.json'
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-artifact
+          path: sbom-trivy.spdx.json
+
+      - name: Generate SBOM with Anchore syft
+        uses: anchore/sbom-action@v0 # Use the latest version
+        with:
+          path: . # Scan the entire repository
+          format: spdx-json # Generate SBOM in SPDX JSON format
+          output-file: sbom-anchore.spdx.json # Name the output file
           
-      - name: Scan Image
+      - name: Scan Image with Grype
         uses: anchore/scan-action@v6
         id: scan
         with:
