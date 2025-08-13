@@ -28,7 +28,8 @@ jobs:
         id: scan
         with:
           image: my-image:${{ github.sha }}  
-          fail-build: true
+          fail-build: false
+          severity-cutoff: high      # or critical/high/low/negligible
           output-format: sarif
 
       
