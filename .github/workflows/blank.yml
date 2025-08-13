@@ -34,3 +34,19 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+      - name: Generate SBOM with Syft
+        uses: anchore/sbom-action@v0
+        with:
+          image: 'my-image:latest' # Or path to source code
+          output-file: 'sbom.json'
+          output-format: 'spdx-json'
+
+      - name: Scan SBOM with Grype
+        uses: anchore/scan-action@v6
+        with:
+          sbom: 'sbom.json'
+          fail-build: false         
+          severity-cutoff: medium  
+          output-format: table     
+          only-fixed: true       
