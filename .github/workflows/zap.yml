@@ -33,4 +33,8 @@ jobs:
           allow_issue_writing: false # Prevents GitHub issue creation
           #cmd_options: '-r zap_report.html' # Generates an HTML report named zap_report.html
 
+      - name: Nuclei - Vulnerability Scan
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          target: https://www.greyorange.com/
         
