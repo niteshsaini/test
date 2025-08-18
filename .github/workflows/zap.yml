@@ -31,11 +31,6 @@ jobs:
         with:
           target: https://www.greyorange.com/ 
           allow_issue_writing: false # Prevents GitHub issue creation
-          cmd_options: '-r zap_report.html' # Generates an HTML report named zap_report.html
+          #cmd_options: '-r zap_report.html' # Generates an HTML report named zap_report.html
 
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-baseline-report
-          path: zap_report.html
         
