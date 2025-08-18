@@ -51,8 +51,8 @@ jobs:
           image: 'docker.io/my-app:${{ github.sha }}'
           fail-build: false
           output-format: table
-      #    only-fixed: true
-      #    severity-cutoff: medium
+          only-fixed: true
+          severity-cutoff: medium
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
@@ -61,6 +61,6 @@ jobs:
           image-ref: 'docker.io/my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '0'
-       #   ignore-unfixed: true
+          ignore-unfixed: true
           vuln-type: 'os,library'
-       #   severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL,HIGH'
